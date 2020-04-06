@@ -2,11 +2,11 @@ package br.edu.up.administradorlojista.model;
 
 public enum Situacao {
 	
-	ALUGADO("Loja se encontra alugada"), DISPONIVEL("Loja disponivel"); // colocar mais status
+	LOCADO(1), DISPONIVEL(2), INDISPONIVEL(3); // colocar mais status
 
-	private String descricao;
+	private Integer descricao;
 	
-	Situacao(String descricao) {
+	Situacao(Integer descricao) {
 		this.descricao = descricao;
 	}
 
