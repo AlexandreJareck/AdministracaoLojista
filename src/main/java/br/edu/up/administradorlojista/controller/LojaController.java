@@ -1,7 +1,5 @@
 package br.edu.up.administradorlojista.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +51,14 @@ public class LojaController {
 	}
 	
 	@GetMapping("/situacao={situacao}")
-	public @ResponseBody Iterable<Loja> getAllByStatus(@PathVariable String situacao) {
+	public @ResponseBody Iterable<Loja> getAllBySituacao(@PathVariable String situacao) {
 		Iterable<Loja> loja = repository.getAllBySituacao(situacao);
+		return loja;
+	}
+	
+	@GetMapping("/categoria={categoria}")
+	public @ResponseBody Iterable<Loja> getAllByCategoria(@PathVariable String categoria) {
+		Iterable<Loja> loja = repository.getAllByCategoria(categoria);
 		return loja;
 	}
 		

@@ -1,7 +1,6 @@
 package br.edu.up.administradorlojista.model;
 
 import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "LOJA")
 public class Loja implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -49,8 +48,8 @@ public class Loja implements Serializable{
     @Enumerated(EnumType.STRING)
     @Column(length = 100)
     private Situacao situacao;
-	
-    public int getId() {
+
+	public int getId() {
 		return id;
 	}
 
@@ -114,4 +113,7 @@ public class Loja implements Serializable{
 		this.situacao = situacao;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

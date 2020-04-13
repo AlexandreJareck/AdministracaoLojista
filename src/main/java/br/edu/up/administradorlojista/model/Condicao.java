@@ -9,5 +9,4 @@ public enum Condicao {
 	Condicao(String string) {
 		// TODO Auto-generated constructor stub
 	}
-	
 }
