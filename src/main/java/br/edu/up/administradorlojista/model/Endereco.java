@@ -2,21 +2,20 @@ package br.edu.up.administradorlojista.model;
 
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "ENDERECO")
+
 public class Endereco implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -34,6 +33,9 @@ public class Endereco implements Serializable{
 	private String cidade;
 	@Column(name = "Uf", nullable = false)
 	private String uf;	
+	@Column(name = "Cep", nullable = false)
+	private String cep;
+	
 	public int getId() {
 		return id;
 	}
@@ -76,7 +78,7 @@ public class Endereco implements Serializable{
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	@Column(name = "Cep", nullable = false)
-	private String cep;
-	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}	
 }

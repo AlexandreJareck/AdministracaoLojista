@@ -9,5 +9,4 @@ public enum Condicao {
 	Condicao(Integer index) {
 		this.index = index;
 	}
-	
 }
