@@ -4,7 +4,11 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +26,6 @@ import br.edu.up.administradorlojista.repository.LojaRepository;
 @RestController
 @RequestMapping("loja")
 public class LojaController {
-
 	@Autowired
 	private LojaRepository repository;
 	
@@ -40,11 +43,13 @@ public class LojaController {
 	}
 	
 	@PostMapping("/cadastrar_loja")
+	@Transactional(propagation=Propagation.REQUIRED,readOnly=false)
 	public Loja add(@RequestBody @Valid Loja loja) {
 		return repository.save(loja);
 	}
 	
 	@DeleteMapping("/{id}")
+	@Transactional(propagation=Propagation.REQUIRED,readOnly=false)
 	public Loja delete(@PathVariable Integer id) {
 		Loja loja = repository.getOne(id);
 		repository.delete(loja);

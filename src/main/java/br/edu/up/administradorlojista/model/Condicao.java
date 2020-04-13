@@ -2,12 +2,12 @@ package br.edu.up.administradorlojista.model;
 
 public enum Condicao {
 
-	MANUTENCAO("Loja em manutenção"); // colocar mais status;
+	MANUTENCAO(1), DISPONIVEL(2), LOCADO(3); // colocar mais status;
 
-	private String string;
+	private Integer index;
 	
-	Condicao(String string) {
-		// TODO Auto-generated constructor stub
+	Condicao(Integer index) {
+		this.index = index;
 	}
 	
 }
