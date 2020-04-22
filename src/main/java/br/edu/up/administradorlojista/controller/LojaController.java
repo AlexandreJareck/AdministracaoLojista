@@ -1,9 +1,6 @@
 package br.edu.up.administradorlojista.controller;
 
 import javax.validation.Valid;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.edu.up.administradorlojista.model.Loja;
 import br.edu.up.administradorlojista.repository.LojaRepository;
 
@@ -46,7 +42,7 @@ public class LojaController {
 		return repository.save(loja);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/id={id}")
 	@Transactional(propagation=Propagation.REQUIRED,readOnly=false)
 	public Loja delete(@PathVariable Integer id) {
 		Loja loja = repository.getOne(id);
@@ -65,6 +61,12 @@ public class LojaController {
 	public @ResponseBody Iterable<Loja> getAllByCategoria(@PathVariable String categoria) {
 		Iterable<Loja> loja = repository.getAllByCategoria(categoria);
 		return loja;
+	}
+	
+	@GetMapping("/faturamento")
+	public @ResponseBody Double getAllByAluguel() {
+		return repository.getAllByAluguel();
+	
 	}
 		
 }

@@ -28,6 +28,12 @@ public class Loja implements Serializable{
 	@Column(name = "CodigoLoja", nullable = false)
 	private String codigoLoja;
 	
+	@Column(name = "NomeLoja", nullable = false)
+	private String nomeLoja;
+	
+	@Column(name = "ValorAluguel", nullable = false)
+	private Double valorAluguel;
+	
 	@Column(name = "Tamanho", nullable = false)
 	private Double tamanho;
 	
@@ -40,11 +46,7 @@ public class Loja implements Serializable{
 	@Enumerated(EnumType.STRING)
     @Column(length = 100)
     private Categoria categoria;
-    
-    @Enumerated(EnumType.STRING)
-    @Column(length = 100)
-    private Condicao condicao;
-    
+      
     @Enumerated(EnumType.STRING)
     @Column(length = 100)
     private Situacao situacao;
@@ -63,6 +65,22 @@ public class Loja implements Serializable{
 
 	public void setCodigoLoja(String codigoLoja) {
 		this.codigoLoja = codigoLoja;
+	}
+
+	public String getNomeLoja() {
+		return nomeLoja;
+	}
+
+	public void setNomeLoja(String nomeLoja) {
+		this.nomeLoja = nomeLoja;
+	}
+
+	public Double getValorAluguel() {
+		return valorAluguel;
+	}
+
+	public void setValorAluguel(Double valorAluguel) {
+		this.valorAluguel = valorAluguel;
 	}
 
 	public Double getTamanho() {
@@ -97,14 +115,6 @@ public class Loja implements Serializable{
 		this.categoria = categoria;
 	}
 
-	public Condicao getCondicao() {
-		return condicao;
-	}
-
-	public void setCondicao(Condicao condicao) {
-		this.condicao = condicao;
-	}
-
 	public Situacao getSituacao() {
 		return situacao;
 	}
@@ -116,4 +126,6 @@ public class Loja implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
 }
