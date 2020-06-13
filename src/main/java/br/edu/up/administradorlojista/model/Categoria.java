@@ -1,25 +1,25 @@
 package br.edu.up.administradorlojista.model;
 
 public enum Categoria {
-	
-	ALIMENTOS("Praça de Alimentação"),
-	ROUPAS("Roupas em geral"),
-	TECNOLOGIA("Aparelhos de tecnologia"),
-	DECORAÇÃO("Artefatos decorativos"),
-	BRINQUEDOS("Artefatos infantis"),
-	ENTRETENIMENTO("Cinemas...");
-	
-	private String descricao;
-	
-	public String getDescricao() {
-		return descricao;
-	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    ALIMENTOS(1),
+    ROUPAS(2),
+    TECNOLOGIA(3),
+    DECORAÇÃO(4),
+    BRINQUEDOS(5),
+    ENTRETENIMENTO(6);
 
-	Categoria(String descricao) {
-		this.descricao = descricao;	
-	}	
+    public Integer index;
+
+    public Integer getDescricao() {
+        return index;
+    }
+
+    public void setDescricao(Integer index) {
+        this.index = index;
+    }
+
+    Categoria(Integer index) {
+        this.index = index;
+    }
 }

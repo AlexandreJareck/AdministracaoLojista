@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,6 +42,13 @@ public class LojaController {
 	public Loja add(@RequestBody @Valid Loja loja) {
 		return repository.save(loja);
 	}
+	
+	@PutMapping("/{id}")
+    public Loja update(@PathVariable Integer id, @RequestBody @Valid Loja loja)
+    {
+        loja.setId(id);
+        return repository.save(loja);
+    }
 	
 	@DeleteMapping("/id={id}")
 	@Transactional(propagation=Propagation.REQUIRED,readOnly=false)
