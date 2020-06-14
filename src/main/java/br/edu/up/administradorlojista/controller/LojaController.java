@@ -50,7 +50,7 @@ public class LojaController {
         return repository.save(loja);
     }
 	
-	@DeleteMapping("/id={id}")
+	@DeleteMapping("/{id}")
 	@Transactional(propagation=Propagation.REQUIRED,readOnly=false)
 	public Loja delete(@PathVariable Integer id) {
 		Loja loja = repository.getOne(id);

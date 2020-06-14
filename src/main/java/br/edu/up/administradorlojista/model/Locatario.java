@@ -1,7 +1,6 @@
 package br.edu.up.administradorlojista.model;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,14 +29,14 @@ public class Locatario implements Serializable{
 	@Column(name = "Documento", nullable = false)
 	private String documento;
 	
-	@OneToMany
-	private List<Contato> contato;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Contato contato;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 	
-	@OneToMany
-	private List<Contrato> contrato;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Contrato contrato;
 
 	public int getId() {
 		return id;
@@ -64,13 +62,6 @@ public class Locatario implements Serializable{
 		this.documento = documento;
 	}
 
-	public List<Contato> getContato() {
-		return contato;
-	}
-
-	public void setContato(List<Contato> contato) {
-		this.contato = contato;
-	}
 
 	public Endereco getEndereco() {
 		return endereco;
@@ -80,11 +71,19 @@ public class Locatario implements Serializable{
 		this.endereco = endereco;
 	}
 
-	public List<Contrato> getContrato() {
+	public Contato getContato() {
+		return contato;
+	}
+
+	public void setContato(Contato contato) {
+		this.contato = contato;
+	}
+
+	public Contrato getContrato() {
 		return contrato;
 	}
 
-	public void setContrato(List<Contrato> contrato) {
+	public void setContrato(Contrato contrato) {
 		this.contrato = contrato;
 	}
 

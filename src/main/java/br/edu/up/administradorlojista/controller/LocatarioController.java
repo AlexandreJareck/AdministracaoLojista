@@ -38,7 +38,7 @@ public class LocatarioController {
 		return locatario;
 	}
 	
-	@PostMapping
+	@PostMapping("/cadastrar_locatario")
 	public Locatario add(@RequestBody @Valid Locatario locatario) {
 		return repository.save(locatario);
 	}
