@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.up.administradorlojista.dto.LocatarioDTO;
 import br.edu.up.administradorlojista.model.Locatario;
 import br.edu.up.administradorlojista.repository.LocatarioRepository;
 
@@ -39,7 +40,10 @@ public class LocatarioController {
 	}
 	
 	@PostMapping("/cadastrar_locatario")
-	public Locatario add(@RequestBody @Valid Locatario locatario) {
+	public Locatario add(@RequestBody @Valid LocatarioDTO locatarioDto) {
+		
+		Locatario locatario = new Locatario(locatarioDto);
+		
 		return repository.save(locatario);
 	}
 	

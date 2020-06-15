@@ -11,12 +11,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import br.edu.up.administradorlojista.dto.LocatarioDTO;
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "LOCATARIO")
 public class Locatario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	public Locatario(LocatarioDTO dto){
+		
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
