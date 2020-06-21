@@ -5,18 +5,45 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.edu.up.administradorlojista.model.Locatario;
+
 public class LocatarioDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	public LocatarioDTO() {}
+	
+	public LocatarioDTO(Locatario l) {
+		id = l.getId();
+		nome = l.getNome();
+		documento = l.getDocumento();
+		residencial = l.getContato().getResidencial();
+		comercial = l.getContato().getComercial();
+		celular = l.getContato().getCelular();
+		email = l.getContato().getCelular();
+		rua = l.getEndereco().getRua();
+		numero = l.getEndereco().getNumero();
+		bairro = l.getEndereco().getBairro();
+		cidade = l.getEndereco().getCidade();
+		uf = l.getEndereco().getUf();
+		cep = l.getEndereco().getCep();
+		aluguel = l.getContrato().getAluguel();
+		dataInicio = l.getContrato().getDataInicio();
+		dataFim = l.getContrato().getDataFim();
+		dataVencimento = l.getContrato().getDataVencimento();
+		descricao = l.getContrato().getDescricao();
+		inadimplente = l.getContrato().getInadimplente();
+		if(l.getLoja()!=null)
+			loja = l.getLoja();
+	}
 	
 	private Integer id;
 	private String nome;
 	private String documento;
 	private String residencial;
 	private String comercial;
-	private String celualar;
+	private String celular;
 	private String email;
-	private String fax;
 	private String rua;
 	private String numero;
 	private String bairro;
@@ -24,6 +51,7 @@ public class LocatarioDTO implements Serializable{
 	private String uf;
 	private String cep;
 	private double aluguel;
+	private Integer loja;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date dataInicio;
@@ -36,6 +64,7 @@ public class LocatarioDTO implements Serializable{
 	
 	private String descricao;
 	private Boolean inadimplente;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -66,23 +95,17 @@ public class LocatarioDTO implements Serializable{
 	public void setComercial(String comercial) {
 		this.comercial = comercial;
 	}
-	public String getCelualar() {
-		return celualar;
+	public String getCelular() {
+		return celular;
 	}
-	public void setCelualar(String celualar) {
-		this.celualar = celualar;
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public String getFax() {
-		return fax;
-	}
-	public void setFax(String fax) {
-		this.fax = fax;
 	}
 	public String getRua() {
 		return rua;
@@ -158,6 +181,13 @@ public class LocatarioDTO implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public Integer getLoja() {
+		return loja;
+	}
+
+	public void setLoja(Integer loja) {
+		this.loja = loja;
 	}
 	
 }

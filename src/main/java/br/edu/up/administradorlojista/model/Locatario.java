@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -20,8 +20,37 @@ public class Locatario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	public Locatario() {}
+	
 	public Locatario(LocatarioDTO dto){
 		
+		Contato contato = new Contato();
+		Endereco endereco = new Endereco();
+		Contrato contrato = new Contrato();
+		
+		this.nome = dto.getNome();
+		this.documento = dto.getDocumento();
+		contato.setCelular(dto.getCelular());
+		contato.setComercial(dto.getComercial());
+		contato.setEmail(dto.getEmail());
+		contato.setResidencial(dto.getResidencial());
+		contrato.setAluguel(dto.getAluguel());
+		contrato.setDataFim(dto.getDataFim());
+		contrato.setDataInicio(dto.getDataInicio());
+		contrato.setDataVencimento(dto.getDataVencimento());
+		contrato.setDescricao(dto.getDescricao());
+		contrato.setInadimplente(false);
+		endereco.setBairro(dto.getBairro());
+		endereco.setCep(dto.getCep());
+		endereco.setCidade(dto.getCidade());
+		endereco.setNumero(dto.getNumero());
+		endereco.setRua(dto.getRua());
+		endereco.setUf(dto.getUf());
+		
+		this.contato = contato;
+		this.endereco = endereco;
+		this.contrato = contrato;
+		this.loja = dto.getLoja();
 	}
 
 	@Id
@@ -35,14 +64,17 @@ public class Locatario implements Serializable{
 	@Column(name = "Documento", nullable = false)
 	private String documento;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Contato contato;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Contrato contrato;
+	
+	@Column(name = "Loja", nullable = false)
+	private Integer loja;
 
 	public int getId() {
 		return id;
@@ -96,4 +128,13 @@ public class Locatario implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public Integer getLoja() {
+		return loja;
+	}
+
+	public void setLoja(Integer loja) {
+		this.loja = loja;
+	}
+	
 }

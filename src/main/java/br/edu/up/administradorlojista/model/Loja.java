@@ -1,7 +1,6 @@
 package br.edu.up.administradorlojista.model;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,9 +8,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import br.edu.up.administradorlojista.dto.LojaDTO;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -19,6 +19,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Loja implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	public Loja() {}
+	
+	public Loja(LojaDTO dto) {
+		
+		Categoria categoria = Categoria.ALIMENTOS;
+		Situacao situacao = Situacao.DISPONIVEL;
+		
+		codigoLoja = dto.getCodigoLoja();
+		nomeLoja = dto.getNomeLoja();
+		valorAluguel = dto.getValorAluguel();
+		tamanho = dto.getTamanho();
+		setor = dto.getSetor();
+		categoria.setDescricao(Integer.parseInt(dto.getCategoria()));
+		situacao.setDescricao(Integer.parseInt(dto.getSituacao()));
+		this.categoria = categoria;
+		this.situacao = situacao;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,8 +58,8 @@ public class Loja implements Serializable{
 	@Column(name = "Setor", nullable = false)
 	private String setor;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Locatario locatario;
+	@Column(name = "Locatario")
+	private Integer locatario;
 	
 	@Enumerated(EnumType.STRING)
     @Column(length = 100)
@@ -99,11 +117,11 @@ public class Loja implements Serializable{
 		this.setor = setor;
 	}
 
-	public Locatario getLocatario() {
+	public Integer getLocatario() {
 		return locatario;
 	}
 
-	public void setLocatario(Locatario locatario) {
+	public void setLocatario(Integer locatario) {
 		this.locatario = locatario;
 	}
 

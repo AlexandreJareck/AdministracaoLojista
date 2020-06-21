@@ -22,6 +22,4 @@ public interface LojaRepository extends JpaRepository<Loja, Integer> {
 	@Query(value ="SELECT SUM(valor_aluguel) as Faturamento_Mensal FROM loja WHERE situacao='LOCADO'", nativeQuery = true)
 	Double getAllByAluguel();
 	
-	// como fazer a desgraça desse metodo?
-	
 }

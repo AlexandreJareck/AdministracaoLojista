@@ -32,9 +32,6 @@ public class Contato implements Serializable{
 	
 	@Column(name = "Email", nullable = false)
 	private String email;
-	
-	@Column(name = "Fax", nullable = false)
-	private String fax;
 
 	public int getId() {
 		return id;
@@ -74,14 +71,6 @@ public class Contato implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getFax() {
-		return fax;
-	}
-
-	public void setFax(String fax) {
-		this.fax = fax;
 	}
 
 	public static long getSerialversionuid() {

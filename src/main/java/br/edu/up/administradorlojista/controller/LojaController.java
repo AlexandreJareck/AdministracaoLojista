@@ -1,5 +1,8 @@
 package br.edu.up.administradorlojista.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
@@ -13,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.edu.up.administradorlojista.dto.LojaDTO;
+import br.edu.up.administradorlojista.model.Locatario;
 import br.edu.up.administradorlojista.model.Loja;
+import br.edu.up.administradorlojista.repository.LocatarioRepository;
 import br.edu.up.administradorlojista.repository.LojaRepository;
 
 
@@ -24,30 +31,67 @@ public class LojaController {
 	@Autowired
 	private LojaRepository repository;
 	
+	@Autowired
+	private LocatarioRepository locatarioR;
+	
 	
 	@GetMapping(produces = "application/json")
-	public @ResponseBody Iterable<Loja> listAll(){
+	public @ResponseBody Iterable<LojaDTO> listAll(){
 		Iterable<Loja> list = repository.findAll();
-		return list;		
+		
+		List<LojaDTO> listDto = new ArrayList<>();
+		
+		for(Loja loja : list) {
+			LojaDTO dto = new LojaDTO(loja);
+			listDto.add(dto);
+		}
+		
+		return listDto;		
+	}
+	
+	@GetMapping(path = "/listLojaDisponivel", produces = "application/json")
+	public @ResponseBody Iterable<Loja> listLojaDisponivel(){
+		Iterable<Loja> list = repository.findAll();
+		List<Loja> listFilter = new ArrayList<>();
+		
+		for(Loja l : list) {
+			if(l.getLocatario() == null) {
+				listFilter.add(l);
+			}
+		}
+		
+		return listFilter;		
 	}
 	
 	@GetMapping("/{id}")
-	public @ResponseBody Loja getById(@PathVariable Integer id) {
+	public @ResponseBody LojaDTO getById(@PathVariable Integer id) {
 		Loja loja = repository.getOne(id);
-		return loja;
+		
+		LojaDTO dto = new LojaDTO(loja);
+		
+		return dto;
 	}
 	
 	@PostMapping("/cadastrar_loja")
 	@Transactional(propagation=Propagation.REQUIRED,readOnly=false)
-	public Loja add(@RequestBody @Valid Loja loja) {
+	public Loja add(@RequestBody @Valid Loja loja) {		
 		return repository.save(loja);
 	}
 	
+	
 	@PutMapping("/{id}")
-    public Loja update(@PathVariable Integer id, @RequestBody @Valid Loja loja)
+    public Loja update(@PathVariable Integer id, @RequestBody @Valid LojaDTO dto)
     {
-        loja.setId(id);
-        return repository.save(loja);
+		Loja loja = new Loja(dto);
+		loja.setId(id);
+		
+		Locatario locatario = locatarioR.getOne(dto.getLocatario());
+		
+		locatario.setLoja(loja.getId());
+        
+		locatarioR.save(locatario);
+		
+		return repository.save(loja);
     }
 	
 	@DeleteMapping("/{id}")
@@ -74,7 +118,6 @@ public class LojaController {
 	@GetMapping("/faturamento")
 	public @ResponseBody Double getAllByAluguel() {
 		return repository.getAllByAluguel();
-	
 	}
 		
 }
